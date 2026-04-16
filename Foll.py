@@ -316,5 +316,5 @@ def compute_energy(hw,dt):
 
 def compute_energychange(hw,dx, kappa=1.0):
     du = np.diff(hw, axis=1) / dx
-    energy_change = np.sum(du**2, axis=1)
-    return - kappa * energy_change*dx
+    integral = np.sum(du**2, axis=1)
+    return - kappa * integral*dx
