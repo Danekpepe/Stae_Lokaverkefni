@@ -2,5 +2,6 @@
 venv/
 env/
 __pycache__/
+Test.py
 
 .ipynb_checkpoints/
