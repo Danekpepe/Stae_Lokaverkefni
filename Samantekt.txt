@@ -1,0 +1,55 @@
+STÆ401G - Home Assignment: Numerical Analysis IV (2026)
+
+I. Overview
+This assignment is divided into two parts: solving the heat equation using the finite difference method and solving the Poisson equation using the finite element method. Students may work in groups of 2 to 4. The final submission is a zip file containing a report and source code (Matlab, Python, Octave, Mathematica, or Maple).
+Submission Deadline: Friday, April 17, 2026, at 18:00 on Canvas.
+
+II. Part 1: Finite Difference Method and the Heat Equation
+Task: Find a numerical solution for the 1D heat equation: ∂ₜu = κ∂ₓ²u.
+
+Grid Preparation:
+
+Define space steps (h = L/N) and time steps (τ = T/M).
+
+Use "forward difference" for time derivatives and "central difference" for space derivatives.
+
+Programming:
+
+Create a function: function HW = heatwave(L, T, N, M, psi, phi, f).
+
+Solve the system Ac = b, where A is a P×P matrix (P = total nodes).
+
+Use sparse matrices to speed up calculations.
+
+Validation and Testing:
+
+Test Run: Run with specific parameters (L=1, T=1/20, N=6, M=4) and compare against provided results.
+
+Exact Solution: Compare numerical results (HW) against the analytical Fourier series solution for specific boundary conditions.
+
+Energy Analysis: Verify that energy E(t) is a decreasing function over time (not conserved) for Dirichlet/Neumann conditions.
+
+Stability: Note that numerical stability requires σ = (τκ)/h² ≤ 1/2.
+
+III. Part 2: Poisson Equation and Finite Element Method (FEM)
+Task: Approximate the 2D Poisson equation (-Δφ = f) using FEM on a triangular mesh.
+
+Grid Preparation:
+
+The domain D is a rectangle [0, L1] x [0, L2].
+
+Divide the area into right-angled triangles with sides h and k.
+
+Programming:
+
+Create a function: function PE = PoissonEq(L1, L2, h, k, ub, ut, vl, vr, f).
+
+Explain in the report how matrix A and vector b are constructed.
+
+Validation and Testing:
+
+Test Run: Run with specific parameters (L1=L2=1, h=1/5, k=1/4) and verify against provided sample output.
+
+Exact Solution: Compare the numerical result PE against the analytical solution φ(x,y) = e^(-xy).
+
+Gauss's Law: Verify the numerical fulfillment of Gauss's Law (charge density vs. flux). Show that the error E_G decreases as the grid is refi
