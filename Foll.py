@@ -318,3 +318,54 @@ def compute_energychange(hw,dx, kappa=1.0):
     du = np.diff(hw, axis=1) / dx
     integral = np.sum(du**2, axis=1)
     return - kappa * integral*dx
+
+import numpy as np
+
+def calculate_enclosed_charge(phi, L1, L2):
+    """
+    Computes the charge Q given a 2D potential array phi.
+    
+    Parameters:
+    phi (2D array): Potential values on a grid of shape (Ny, Nx)
+    L1 (float): Length of the rectangle in the x-direction
+    L2 (float): Length of the rectangle in the y-direction
+    
+    Returns:
+    float: The calculated charge Q
+    """
+    Ny, Nx = phi.shape
+    dx = L1 / (Nx - 1)
+    dy = L2 / (Ny - 1)
+
+    # 1. Calculate partial derivatives at the boundaries
+    # Right boundary (x = L1): Backward difference
+    grad_x_right = (phi[:, -1] - phi[:, -2]) / dx
+    
+    # Left boundary (x = 0): Forward difference
+    grad_x_left = (phi[:, 1] - phi[:, 0]) / dx
+    
+    # Top boundary (y = L2): Backward difference
+    grad_y_top = (phi[-1, :] - phi[-2, :]) / dy
+    
+    # Bottom boundary (y = 0): Forward difference
+    grad_y_bottom = (phi[1, :] - phi[0, :]) / dy
+
+    # 2. Perform 1D integration along the edges (Trapezoidal rule)
+    int_right  = np.trapezoid(grad_x_right, dx=dy)
+    int_left   = np.trapezoid(grad_x_left, dx=dy)
+    int_top    = np.trapezoid(grad_y_top, dx=dx)
+    int_bottom = np.trapezoid(grad_y_bottom, dx=dx)
+
+    # 3. Sum the flux and solve for Q
+    # Based on: Q + Flux_right - Flux_left + Flux_top - Flux_bottom = 0
+    net_flux = int_right - int_left + int_top - int_bottom
+    Q = -net_flux
+    
+    return Q
+
+# Example Usage:
+# nx, ny = 100, 100
+# L1, L2 = 1.0, 1.0
+# phi = np.random.rand(ny, nx) # Replace with your actual phi array
+# Q = calculate_enclosed_charge(phi, L1, L2)
+# print(f"Enclosed Charge Q: {Q}")
