@@ -1,6 +1,8 @@
 Fylgiskjöl fyrir heimaverkefni í Stærðfræði4 áfanganum.
 
-Foll.py inniheldur öll föll notuð til úrlausnar
+- **Foll.py** inniheldur öll föll notuð til úrlausnar á Verkefninu
+- **Lokaverkefni.ipynb** inniheldur notkun á þessum föllum og útkomur
+- **Skýrsla.pdf** byggir síðan á þessum gögnum
 
 ## 🛠️ Setup Instructions
 

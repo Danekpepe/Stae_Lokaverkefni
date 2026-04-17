@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.sparse import lil_matrix
 
 HW = np.array([[1,2,3], [4,5,6], [7,8,9],[10,11,12]])
 
@@ -14,4 +15,7 @@ x = np.array([1,2,3,4,5,6,7,8])
 
 y = np.array([5,6,7,8,3,2,1,2])
 
-print(x*y)
+P = 4
+A = lil_matrix((P, P))
+
+print(A)
